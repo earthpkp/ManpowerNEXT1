@@ -75,35 +75,28 @@ export default function Home() {
           onPositionChange={(value) => handleFilterChange('position', value)}
         />
 
-        <SkillsFilter
-          selectedSkills={selectedSkills}
-          onSkillsChange={handleSkillsChange}
-        />
-
-        <div className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-          พบ {filteredWorkers.length} รายการ
-        </div>
-
-        {currentWorkers.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              ไม่พบข้อมูลที่ตรงกับเงื่อนไขการค้นหา
-            </p>
+        {/* Using grid layout for SkillsFilter and WorkerCard */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+          {/* Skills Filter */}
+          <div className="col-span-1 md:col-span-1 lg:col-span-1">
+            <SkillsFilter selectedSkills={selectedSkills} onSkillsChange={handleSkillsChange} />
           </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+
+          {/* Worker Cards */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
               {currentWorkers.map((worker) => (
                 <WorkerCard key={worker.id} worker={worker} />
               ))}
             </div>
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </>
-        )}
+          </div>
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </main>
   );
