@@ -44,13 +44,15 @@ export function SkillsFilter({ selectedSkills, onSkillsChange }: SkillsFilterPro
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
       <h3 className="text-lg font-semibold mb-4">ทักษะ</h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      {/* ใช้ flex-col เพื่อให้ checkbox และ label แสดงเป็นแถวแนวตั้ง */}
+      <div className="flex flex-col space-y-3">
         {AVAILABLE_SKILLS.map((skill) => (
           <div key={skill} className="flex items-center space-x-2">
             <Checkbox
               id={`skill-${skill}`}
               checked={selectedSkills.includes(skill)}
               onCheckedChange={() => handleSkillToggle(skill)}
+              className="h-4 w-4" // ปรับขนาดของ checkbox ตามต้องการ
             />
             <label
               htmlFor={`skill-${skill}`}
